@@ -17,4 +17,4 @@ def count_up(start, stop):
         print(num)
 
 
-count_up(5, 84)
+count_up(5, 7)
