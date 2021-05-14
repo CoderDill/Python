@@ -18,3 +18,16 @@
 
 # print("alldone")
 
+scores = [45, 99, 100, 49]
+
+if 45 in scores:
+
+    vegan_no_nos = ["eggs", "meat", "fish"]
+
+    pie_ingredients = ["sugar", "eggs"]
+
+    for food in pie_ingredients:
+        if food in vegan_no_nos:
+            print(f"You cannot eat {food}")
+        else:
+            print(f"You can eat {food}")

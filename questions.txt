@@ -1,0 +1,3 @@
+What's the difference between something being undefined as opposed
+to returning an error? i.e pyton returning errors when js would go undefined.
+Advantages/disadvantages?
