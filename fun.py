@@ -31,3 +31,5 @@ if 45 in scores:
             print(f"You cannot eat {food}")
         else:
             print(f"You can eat {food}")
+
+nums = range(0, 100)
