@@ -8,4 +8,13 @@ def multiple_letter_count(phrase):
         {'Y': 1, 'a': 1, 'y': 1}
     """
 
-    
+    phrase.lower()
+    count = 0
+
+    for char in phrase:
+        phrase.lower()
+        count = count + 1
+        return print({char: count})
+
+
+multiple_letter_count("I like working on a new one.")
