@@ -14,10 +14,13 @@ def intersection(l1, l2):
         []
     """
 
-    lst1 = set(l1)
-    lst2 = set(l2)
-    common_numbers = lst1 & lst2
-    return list(common_numbers)
+    # lst1 = set(l1)
+    # lst2 = set(l2)
+    # common_numbers = lst1 & lst2
+    # return list(common_numbers)
+
+    # much better solution
+    return list(set(l1) & set(l2))
 
 
 intersection([1, 2, 3], [2, 3, 4])
