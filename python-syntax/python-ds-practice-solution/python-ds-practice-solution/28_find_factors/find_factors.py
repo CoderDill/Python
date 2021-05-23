@@ -14,7 +14,7 @@ def find_factors(num):
     [1, 293, 1097, 321421]
     """
 
-    n_list = [n for n in range (1, num // 2 + 1) if num % n == 0]
+    n_list = [n for n in range(1, num // 2 + 1) if num % n == 0]
 
     n_list.append(num)
 
