@@ -24,9 +24,10 @@ def sum_range(nums, start=0, end=None):
         9
     """
 
-    
+    if end is None:
+        end = len(nums)
+    return sum(nums[start:end + 1])
 
 
-
-    nums = [1, 2, 3, 4]
-    sum_range(nums)
+nums = [1, 2, 3, 4]
+sum_range(nums)
