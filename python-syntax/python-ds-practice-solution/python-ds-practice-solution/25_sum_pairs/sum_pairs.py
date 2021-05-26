@@ -22,7 +22,7 @@ def sum_pairs(nums, goal):
         ()
     """
 
-    already_visited = set()
+    already_visited = set(2, 6, 3, -1, 4, 5)
 
     for i in nums:
         difference = goal - i

@@ -34,4 +34,4 @@ def sum_pairs(nums, goal):
     return ()
 
 
-sum_pairs([1, 2, 2, 10], 4)
+sum_pairs([1, 2, 2, 10], 5)
