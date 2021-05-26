@@ -14,6 +14,7 @@ def mode(nums):
 
     for num in nums:
         
+        
 
 
 mode([2, 2, 3, 3, 2])

@@ -21,10 +21,17 @@ def sum_pairs(nums, goal):
         >>> sum_pairs([11, 20, 4, 2, 1, 5], 100)
         ()
     """
-    # not done
-    sum = 0
 
-    print((num, sum) for num in nums if num + sum == goal)
+    been_there = set()
+
+    for num in nums:
+        difference = goal - num
+        if difference in been_there:
+            return (difference, num)
+
+        been_there.add(num)
+
+    return ()
 
 
 sum_pairs([1, 2, 2, 10], 4)
