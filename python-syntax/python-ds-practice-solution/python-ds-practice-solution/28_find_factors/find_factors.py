@@ -22,11 +22,11 @@ def find_factors(num):
 
     # or could write by hand with a while loop
     #
-    # factors = []
-    #
-    # while(n <= num):
-    #     if num % n == 0:
-    #         factors.append(n)
-    #     n += 1
-    #
-    # return factors
+    factors = []
+    
+    while(n <= num):
+        if num % n == 0:
+            factors.append(n)
+        n += 1
+    
+    return factors
