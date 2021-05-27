@@ -14,6 +14,12 @@ def find_the_duplicate(nums):
         True
     """
 
-    
+    num_seen = set()
 
-    
+    for num in nums:
+        if num in num_seen:
+            return num
+        num_seen.add(num)
+
+
+find_the_duplicate([1, 2, 1, 4, 3, 12])

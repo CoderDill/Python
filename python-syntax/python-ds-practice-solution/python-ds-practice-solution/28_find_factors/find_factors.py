@@ -23,7 +23,7 @@ def find_factors(num):
     # or could write by hand with a while loop
     #
     factors = []
-    
+
     while(n <= num):
         if num % n == 0:
             factors.append(n)
