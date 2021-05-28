@@ -10,6 +10,6 @@ def min_max_keys(d):
         ('apple', 'cherry')
     """
 
-    keys = d.keys
+    keys = d.keys()
 
     return (min(keys), max(keys))
