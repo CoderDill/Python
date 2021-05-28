@@ -31,7 +31,7 @@ def truncate(phrase, n):
     if n > len(phrase) + 2:
         return phrase
 
-    return print(phrase[:n - 3] + "...")
+    return phrase[:n - 3] + "..."
 
 
 truncate("Hello World", 6)
