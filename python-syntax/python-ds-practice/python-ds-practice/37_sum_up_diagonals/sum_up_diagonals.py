@@ -22,7 +22,8 @@ def sum_up_diagonals(matrix):
     total = 0
 
     for num in range(len(matrix)):
-        print(matrix[num][num])
+        total += matrix[num][num]
+        total += matrix[num][-1 - num]
 
     return total
 
