@@ -19,10 +19,20 @@ def sum_up_diagonals(matrix):
         30
     """
 
-    ((num1, num2), (num3, num4)) = matrix
-    print((num1 + num4) + (num2 + num3))
+    total = 0
+
+    for num in range(len(matrix)):
+        print(matrix[num][num])
+
+    return total
 
 
-m1 = [[1, 2], [30, 40]]
-
-sum_up_diagonals(m1)
+m1 = [
+    [1, 2], [30, 40]
+]
+m2 = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+]
+sum_up_diagonals(m2)
