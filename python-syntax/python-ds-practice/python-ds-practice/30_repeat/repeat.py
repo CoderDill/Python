@@ -3,7 +3,7 @@ def repeat(phrase, num):
 
         >>> repeat('*', 3)
         '***'
-
+ 
         >>> repeat('abc', 2)
         'abcabc'
 
