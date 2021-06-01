@@ -1,3 +1,8 @@
+
+from mondrian_art import generate
+plt = generate()
+plt.show()
+
 # num = 0
 
 # while num <= 100:
@@ -18,18 +23,18 @@
 
 # print("alldone")
 
-scores = [45, 99, 100, 49]
+# scores = [45, 99, 100, 49]
 
-if 45 in scores:
+# if 45 in scores:
 
-    vegan_no_nos = ["eggs", "meat", "fish"]
+#     vegan_no_nos = ["eggs", "meat", "fish"]
 
-    pie_ingredients = ["sugar", "eggs"]
+#     pie_ingredients = ["sugar", "eggs"]
 
-    for food in pie_ingredients:
-        if food in vegan_no_nos:
-            print(f"You cannot eat {food}")
-        else:
-            print(f"You can eat {food}")
+#     for food in pie_ingredients:
+#         if food in vegan_no_nos:
+#             print(f"You cannot eat {food}")
+#         else:
+#             print(f"You can eat {food}")
 
-nums = range(0, 100)
+# nums = range(0, 100)
