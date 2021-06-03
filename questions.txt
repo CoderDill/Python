@@ -1,3 +1,17 @@
 What's the difference between something being undefined as opposed
 to returning an error? i.e pyton returning errors when js would go undefined.
 Advantages/disadvantages?
+
+
+def __init__(self, start=0):
+        """Make a serial number generator starting at start."""
+        self.start = self.next = start
+
+    def generate(self):
+        """I don't understand why we - 1 here"""
+        self.next += 1
+        return self.next - 1
+
+    def reset(self):
+        """Reset generator back to start."""
+        self.next = self.start
