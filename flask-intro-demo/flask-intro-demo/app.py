@@ -1,99 +1,130 @@
-"""Demo Flask application."""
-
-from flask import Flask, request
-from random import choice, randint
+from flask import Flask, request, render_template
+from random import randint, choice
 
 
 app = Flask(__name__)
 
+COMPLIMENTS = ['cool', 'clever', 'Pythonic', 'awesome']
+
 
 @app.route('/')
-def index():
-    """Show homepage"""
-
-    return """
-      <html>
-        <body>
-          <h1>I am the landing page</h1>
-        </body>
-      </html>
-      """
-
-@app.route('/hello')
-def say_hello():
-    """Return simple "Hello" Greeting."""
-
-    html = "<html><body><h1>Hello</h1></body></html>"
+def home_page():
+    """Shows home page"""
+    html = """ 
+    <html>
+      <body>
+        <h1>Home Page</h1>
+        <p>Welcome to my simple app!</p>
+        <a href='/hello'>Go to hello page</a>
+      </body>
+    </html>
+    """
     return html
+
+
+@app.route('/form')
+def show_form():
+    return render_template('form.html')
+
+
+@app.route('/greet')
+def get_greeting():
+    username = request.args["username"]
+    nice_thing = choice(COMPLIMENTS)
+    return render_template('greet.html', username=username, compliment=nice_thing)
+
 
 @app.route('/lucky')
 def lucky_num():
-  return render_template("lucky.html")
+    num = randint(1, 100)
+    return render_template('lucky.html', lucky_num=num)
 
-@app.route("/search")
+
+@app.route('/hello')
+def say_hello():
+    """Shows hello page"""
+    html = """ 
+    <html>
+      <body>
+        <h1>Hello!</h1>
+        <p>This is the hello page</p>
+      </body>
+    </html>
+    """
+    return html
+
+
+@app.route('/goodbye')
+def say_bye():
+    """Says good bye"""
+    return "GOOD BYE!!!"
+
+
+@app.route('/search')
 def search():
-    """Handle GET requests like /search?term=fun"""
-
+    """Shows search results.  Looks for term & sort in query string"""
     term = request.args["term"]
-    return f"<h1>Searching for {term}</h1>"
+    sort = request.args["sort"]
+    return f"<h1>Search Results For: {term}</h1> <p>Sorting by: {sort}</p>"
 
 
-@app.route("/add-comment")
+# @app.route("/post", methods=["POST"])
+# def post_demo():
+#     return "YOU MADE A POST  REQUEST!"
+
+
+# @app.route("/post", methods=["GET"])
+# def get_demo():
+#     return "YOU MADE A GET REQUEST!"
+
+
+@app.route('/add-comment')
 def add_comment_form():
-    """Show form for adding a comment."""
-
+    """Shows add comment form"""
     return """
-      <form method="POST">
-        <input name="comment">
-        <button>Submit</button>
-      </form>
-      """
+    <h1>Add Comment </h1>
+    <form method="POST">
+      <input type='text' placeholder='comment' name='comment'/>
+      <input type='text' placeholder='username' name='username'/>
+      <button>Submit</button>
+    </form>
+  """
 
-@app.route("/add-comment", methods=["POST"])
-def add_comment():
-    """Handle adding comment."""
+
+@app.route('/add-comment', methods=["POST"])
+def save_comment():
+    """Saves comment data (pretends to)"""
 
     comment = request.form["comment"]
+    username = request.form["username"]
+    return f"""
+      <h1>SAVED YOUR COMMENT</h1>
+      <ul>
+        <li>Username: {username}</li>
+        <li>Comment: {comment}</li>
+      </ul>
+    """
 
-    # TODO: save that into a database!
 
-    return f'<h1>Received "{comment}".</h1>'
-      
+@app.route('/r/<subreddit>')
+def show_subreddit(subreddit):
+    return f"<h1>Browsing The {subreddit} Subreddit</h1>"
 
-USERS = {
-  "whiskey": "Whiskey The Dog",
-  "spike": "Spike The Porcupine",
-}  
 
-@app.route('/user/<username>')
-def show_user_profile(username):
-    """Show user profile for user."""
-
-    name = USERS[username]
-    return f"<h1>Profile for {name}</h1>"
+@app.route("/r/<subreddit>/comments/<int:post_id>")
+def show_comments(subreddit, post_id):
+    return f"<h1>Viewing comments for post with id: {post_id} from the {subreddit} Subreddit</h1>"
 
 
 POSTS = {
-  1: "Flask is pretty cool",
-  2: "Python is neat-o"
+    1: "I like chicken tenders",
+    2: "I hate mayo!",
+    3: "Double rainbow all the way",
+    4: "YOLO OMG (kill me)"
 }
 
-@app.route('/post/<int:post_id>')
-def show_post(post_id):
-    """Show post with given integer id."""
 
-    print("post_id is a ", type(post_id))
-
-    post = POSTS[post_id]
-
-    return f"<h1>Post #{post_id}</h1><p>{post}</p>"
-
-
-@app.route("/shop/<toy>")
-def toy_detail(toy):
-    """Show detail about a toy."""
-
-    # Get color from req.args, falling back to None
-    color = request.args.get("color")
-
-    return f"<h1>{toy}</h1>Color: {color}"
+@app.route('/posts/<int:id>')
+def find_post(id):
+    post = POSTS.get(id,  "Post not found")
+    return f"<p>{post}</p>"
