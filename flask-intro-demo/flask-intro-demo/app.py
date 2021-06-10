@@ -26,6 +26,9 @@ def say_hello():
     html = "<html><body><h1>Hello</h1></body></html>"
     return html
 
+@app.route('/lucky')
+def lucky_num():
+  return render_template("lucky.html")
 
 @app.route("/search")
 def search():
