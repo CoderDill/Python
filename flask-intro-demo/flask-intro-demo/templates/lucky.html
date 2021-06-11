@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lucky Number</title>
-  </head>
-  <body>
-    <h1>Your lucky number is: {{lucky_num}}</h1>
-  </body>
-</html>
+{% extends 'base.html'%} {% block title %}Lucky{%endblock%} {% block content %}
+<h1>Your lucky number is: {{lucky_num}}</h1>
+<p>{{msg}}</p>
+{% if lucky_num == 3 %}
+<h2>Hey! That's my lucky number!!</h2>
+<img src="https://media.giphy.com/media/mFdivELJpNac1iiHlI/giphy.gif" alt="" />
+{% else %}
+<h1>That number is ok.</h1>
+{% endif %} {%endblock%}
