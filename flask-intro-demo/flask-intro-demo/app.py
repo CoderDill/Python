@@ -1,5 +1,5 @@
 from logging import debug
-from flask import Flask, request, render_template, redirect, flash
+from flask import Flask, request, render_template, redirect, flash, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from random import randint, choice, sample
 
@@ -36,6 +36,11 @@ def redirect_to_home():
 def show_all_movies():
     return render_template("movies.html", movies=MOVIES)
 
+
+@app.route('/movies/json')
+def get_movies_json():
+    json_obj = jsonify(list(MOVIES))
+    return json_obj
 
 @app.route('/movies/new', methods=["POST"])
 def add_movie():
