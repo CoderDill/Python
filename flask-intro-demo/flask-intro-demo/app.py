@@ -1,14 +1,16 @@
 from logging import debug
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from random import randint, choice, sample
 
 app = Flask(__name__)
 
 app.config["SECRET_KEY"] = 'coolbeans'
+app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 debug = DebugToolbarExtension(app)
 
-COMPLIMENTS = ['cool', 'clever', 'Pythonic', 'awesome']
+COMPLIMENTS = ['cool', 'clever', 'Pythonic', 'awesome', 'sassy']
+MOVIES = {"Amadeus", "Chicken Run", "Angels in the Outfield"}
 
 
 @app.route('/spell/<word>')
@@ -21,6 +23,30 @@ def get_spell(word):
 def home_page():
     """Shows home page"""
     return render_template('home.html')
+
+
+@app.route('/old-home-page')
+def redirect_to_home():
+    """Sends user to new home page"""
+    flash("This page has moved!")
+    return redirect("/")
+
+
+@app.route('/movies')
+def show_all_movies():
+    return render_template("movies.html", movies=MOVIES)
+
+
+@app.route('/movies/new', methods=["POST"])
+def add_movie():
+    title = request.form['title']
+    if title in MOVIES:
+        flash("Movie Already Exists.", 'error')
+    else:
+        MOVIES.add(title)
+        flash("Created your movie", 'success')
+        flash("I love that movie!")
+    return redirect("/movies")
 
 
 @app.route('/form')

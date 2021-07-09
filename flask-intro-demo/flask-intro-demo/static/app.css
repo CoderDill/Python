@@ -26,3 +26,15 @@ body {
 .navbar a:hover {
   background-color: white;
 }
+
+.messages p {
+  background-color: green;
+}
+
+.messages .success {
+  background-color: yellow;
+}
+
+.messages .error {
+  border: 2px solid red;
+}

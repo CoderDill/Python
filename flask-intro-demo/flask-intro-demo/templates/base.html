@@ -14,8 +14,14 @@
       <a href="/form_2">GreetV2</a>
       <a href="/lucky">Lucky</a>
     </nav>
-    {% block content %} {% endblock %}
-    <main id="content">{% block main %} {% endblock %}</main>
+    <main id="content">
+      <section id="messages">
+        {% for category,msg in get_flashed_messages(with_categories=true)%}
+        <p class="{{category}}">{{msg}}</p>
+        {% endfor %} {% block content %} {% endblock %}
+      </section>
+      {% block main %} {% endblock %}
+    </main>
 
     <script src="/static/app.js"></script>
   </body>
