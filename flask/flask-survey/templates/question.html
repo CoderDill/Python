@@ -1,7 +1,15 @@
-{% extends "base.html" %} {% block title %}Start Survey{% endblock%} {% block
-content%}
+{% extends "base.html" %} {% block title %}Survey Questions{% endblock%} {%
+block content%}
 <h1>{{question.question}}</h1>
-<form action="/answer" method="POST">
 
+<form action="/answer" method="POST">
+  {%for choice in question.choices%}
+  <div>
+    <input type="radio" name="answer" value="{{choice}}" />{{choice}}
+  </div>
+  {%endfor%} {%if question.allow_text%}
+  <textarea name="text"></textarea>
+  {%endif%}
+  <button>Next</button>
 </form>
 {%endblock%}

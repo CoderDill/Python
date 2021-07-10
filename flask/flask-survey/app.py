@@ -1,4 +1,5 @@
-from flask import Flask, request, render_template, redirect, flash, session
+from os import SEEK_CUR
+from flask import Flask, request, render_template, redirect, flash, make_response, session
 from flask_debugtoolbar import DebugToolbarExtension
 from werkzeug.wrappers import response
 from surveys import surveys
@@ -25,9 +26,6 @@ def survey_home():
 def pick_survey():
     survey_id = request.form["survey_code"]
 
-    if request.cookies.get(f"completed_{survey_id}"):
-        return render_template("survey_done.html")
-
     survey = surveys[survey_id]
     session[CURRENT_SURVEY_KEY] = survey_id
 
@@ -41,11 +39,57 @@ def start_survey():
     return redirect("questions/0")
 
 
-@app.route("/questions/0")
-def questions():
-    res = session.get(RESPONSES_KEY)
+@app.route("/answer", methods=["POST"])
+def handle_questions():
+    answer = request.form["answer"]
+    text = request.form.get("text", "")
+
+    responses = session[RESPONSES_KEY]
+    responses.append({"answer": answer, "text": text})
+
+    session[RESPONSES_KEY] = responses
     survey_code = session[CURRENT_SURVEY_KEY]
     survey = surveys[survey_code]
 
-    question = survey.questions[0]
-    return render_template("/question.html", question=question)
+    if (len(responses) == len(survey.questions)):
+        return redirect("/completed")
+    else:
+        return redirect(f"/questions/{len(responses)}")
+
+
+@app.route("/questions/<int:question_id>")
+def show_question(question_id):
+    """Display current question."""
+    responses = session.get(RESPONSES_KEY)
+    survey_code = session[CURRENT_SURVEY_KEY]
+    survey = surveys[survey_code]
+
+    if (responses is None):
+        return redirect("/")
+
+    if (len(responses) == len(survey.questions)):
+        return redirect("/completed")
+
+    if (len(responses) != question_id):
+        flash(f"Invalid question: {question_id}")
+        return redirect(f"/questions/{len(responses)}")
+
+    question = survey.questions[question_id]
+
+    return render_template(
+        "question.html", question=question)
+
+
+@app.route("/completed")
+def thank_you():
+    survey_id = session[CURRENT_SURVEY_KEY]
+    survey = surveys[survey_id]
+    responses = session[RESPONSES_KEY]
+
+    html = render_template("completed.html",
+                           survey=survey,
+                           responses=responses)
+
+    response = make_response(html)
+    response.set_cookie(f"completed_{survey_id}", "yes")
+    return response

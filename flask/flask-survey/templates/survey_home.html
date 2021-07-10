@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}Surveys{% endblock%} {% block
+{% extends "base.html" %} {% block title %}Survey Home{% endblock%} {% block
 content%}
 <h3>Welcome</h3>
 
@@ -6,7 +6,7 @@ content%}
   <p>Please choose a survey.</p>
   <select name="survey_code">
     {% for code, survey in surveys.items()%}
-    <option type="checkbox" value="{{code}}">{{survey.title}}</option>
+    <option value="{{code}}">{{survey.title}}</option>
     {% endfor %}
   </select>
   <button>Start</button>
