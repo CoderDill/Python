@@ -1,7 +1,5 @@
-from os import SEEK_CUR
 from flask import Flask, request, render_template, redirect, flash, make_response, session
 from flask_debugtoolbar import DebugToolbarExtension
-from werkzeug.wrappers import response
 from surveys import surveys
 
 # key names will use to store some things in the session;
