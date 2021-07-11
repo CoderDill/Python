@@ -1,7 +1,8 @@
+from unittest import TestCase
 
-from mondrian_art import generate
-plt = generate()
-plt.show()
+# from mondrian_art import generate
+# plt = generate()
+# plt.show()
 
 # num = 0
 
@@ -38,3 +39,19 @@ plt.show()
 #             print(f"You can eat {food}")
 
 # nums = range(0, 100)
+
+def adder(x, y):
+    """Adds two nums together.
+
+    >>>adder(3,5)
+    8
+    """
+
+    return x + y
+
+
+class AdderTestCase(TestCase):
+    """Unit Tests."""
+
+    def test_adder(self):
+        self.assertEqual(adder(2, 5),  7)
