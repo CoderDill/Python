@@ -5,6 +5,20 @@ from unittest import TestCase
 
 
 class ColorViewsTestCase(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        return super().setUpClass()
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        return super().tearDownClass()
+
+    def setUp(self) -> None:
+        return super().setUp()
+
+    def tearDown(self) -> None:
+        return super().tearDown()
+
     def test_color_form(self):
         with app.test_client() as client:
             res = client.get("/")

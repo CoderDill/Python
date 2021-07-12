@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %}Boggle Home{% endblock%} {% block
+content%}
+<h1>Boggle!</h1>
+<div>
+  {%for letter in board%}
+  <div>{{letter}}</div>
+  {%endfor%}
+</div>
+<form>
+  <input type="text" placeholder="Enter Guess" />
+  <button>Submit</button>
+</form>
+
+{%endblock%}

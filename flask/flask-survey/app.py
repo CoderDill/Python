@@ -10,7 +10,10 @@ RESPONSES_KEY = 'responses'
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "cool"
+app.config['TESTING'] = True
+app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.debug = True
 
 debug = DebugToolbarExtension(app)
 
