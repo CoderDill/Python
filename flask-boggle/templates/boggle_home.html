@@ -1,14 +1,27 @@
 {% extends "base.html" %} {% block title %}Boggle Home{% endblock%} {% block
 content%}
 <h1>Boggle!</h1>
-<div>
-  {%for letter in board%}
-  <div>{{letter}}</div>
-  {%endfor%}
-</div>
-<form>
-  <input type="text" placeholder="Enter Guess" />
-  <button>Submit</button>
-</form>
-
+<section class="boggle">
+  <table class="board">
+    <tbody>
+      {%for letter in board%}
+      <tr class="cell">
+        {%for char in letter%}
+        <td>{{char}}</td>
+        {%endfor%}
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+  <form class="enter_guess" method="POST">
+    <input type="text" placeholder="Enter Guess" name="guess" class="guess" />
+    <button>Submit</button>
+  </form>
+  <p class="message">
+    <!-- our JS will put messages here dynamically -->
+  </p>
+  <ul class="guesses">
+    <!-- our JS will put guesses here as guessed -->
+  </ul>
+</section>
 {%endblock%}
