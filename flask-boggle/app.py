@@ -24,10 +24,9 @@ def boggle_home():
     return render_template("boggle_home.html", board=board)
 
 
-@app.route("/check_guess", methods=["POST"])
-def check_guess():
-    guess = request.form.get("guess")
+@app.route("/check-guess")
+def check_guess(guess):
+
     board = session["board"]
     res = boggle_game.check_valid_word(board, guess)
-
     return jsonify({"result": res})
