@@ -1,10 +1,11 @@
-from flask import Flask, request, render_template
-import ranint
-from 
+from flask import Flask, request, render_template, redirect, flash, session
+from flask_debugtoolbar import DebugToolbarExtension
+
 app = Flask(__name__)
+app.config["SECRET_KEY"] = 'coolbeans'
+debug = DebugToolbarExtension(app)
 
-
-@app.route("/lucky")
-def lucky_number():
-    num = ranint(1, 1000)
-    return render_template("lucky.html", lucky_num=num)
+@app.route("/")
+def home_page():
+    
+    return render_template("home.html")
